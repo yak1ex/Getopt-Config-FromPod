@@ -46,7 +46,7 @@ sub _handle_element_end
 sub _handle_text
 {
 	my ($parser, $text) = @_;
-	push @{$parser->{_RESULT}}, eval $text if $parser->{_IN_TARGET};
+	push @{$parser->{_RESULT}}, eval $text if $parser->{_IN_TARGET}; ## no critic (ProhibitStringyEval)
 }
 
 package Getopt::FromPod;
