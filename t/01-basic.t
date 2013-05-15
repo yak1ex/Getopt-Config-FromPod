@@ -1,10 +1,10 @@
 use Test::More tests => 5;
 use Test::Exception;
 
-use_ok 'Getopt::FromPod';
+use_ok 'Getopt::Config::FromPod';
 
 my $p;
-lives_ok { $p = Getopt::FromPod->new; } 'create';
+lives_ok { $p = Getopt::Config::FromPod->new; } 'create';
 
 { 
 	my $dat = <<EOF;

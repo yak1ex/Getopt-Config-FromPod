@@ -1,6 +1,6 @@
 # NAME
 
-Getopt::FromPod - Extract getopt configuration from POD
+Getopt::Config::FromPod - Extract getopt configuration from POD
 
 # VERSION
 
@@ -10,18 +10,18 @@ version v0.0.0
 
     # Typical usage for Getopt::Std
     use Getopt::Std;
-    use Getopt::FromPod;
-    getopts(Getopt::FromPod->new->string);
+    use Getopt::Config::FromPod;
+    getopts(Getopt::Config::FromPod->new->string);
 
     # Typical usage for Getopt::Long or variants
     use Getopt::Long::Descriptive;
-    use Getopt::FromPod;
-    GetOptions(Getopt::FromPod->new->array);
+    use Getopt::Config::FromPod;
+    GetOptions(Getopt::Config::FromPod->new->array);
 
     # For most usage, you don't have to specify parameters but you can do so if necessary
-    Getopt::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
-    Getopt::FromPod->new->arrayref(-package => $package);
-    Getopt::FromPod->new->string(-separator => ','); # for string() only
+    Getopt::Config::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
+    Getopt::Config::FromPod->new->arrayref(-package => $package);
+    Getopt::Config::FromPod->new->string(-separator => ','); # for string() only
 
 # DESCRIPTION
 
@@ -56,7 +56,7 @@ However, I believe it has some advantages to enable us to describe documentation
 Constructor. An available parameter is `'-tag'`.
 You can change POD tag name from `'getopt'`.
 
-    Getopt::FromPod->new(-tag => 'options')->string;
+    Getopt::Config::FromPod->new(-tag => 'options')->string;
     =for options 'h'
 
 ## string(%args)

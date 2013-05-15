@@ -1,4 +1,4 @@
 .build/
-Getopt-FromPod-*.tar.gz
-Getopt-FromPod-*/
+Getopt-Config-FromPod-*.tar.gz
+Getopt-Config-FromPod-*/
 *.BAK

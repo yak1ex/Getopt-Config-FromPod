@@ -1,4 +1,4 @@
-package Getopt::FromPod;
+package Getopt::Config::FromPod;
 
 use strict;
 use warnings;
@@ -6,7 +6,7 @@ use warnings;
 # ABSTRACT: Extract getopt configuration from POD
 # VERSION
 
-package Getopt::FromPod::Extractor;
+package Getopt::Config::FromPod::Extractor;
 
 use strict;
 use warnings;
@@ -49,7 +49,7 @@ sub _handle_text
 	push @{$parser->{_RESULT}}, eval $text if $parser->{_IN_TARGET}; ## no critic (ProhibitStringyEval)
 }
 
-package Getopt::FromPod;
+package Getopt::Config::FromPod;
 
 use Carp;
 
@@ -63,7 +63,7 @@ sub new
 sub _extract
 {
 	my ($self, %args) = @_;
-	my $parser = Getopt::FromPod::Extractor->new(%args);
+	my $parser = Getopt::Config::FromPod::Extractor->new(%args);
 	my $file = $args{-file};
 	$args{-package} ||= 'main';
 	if(! defined $file) {
@@ -112,18 +112,18 @@ __END__
 
   # Typical usage for Getopt::Std
   use Getopt::Std;
-  use Getopt::FromPod;
-  getopts(Getopt::FromPod->new->string);
+  use Getopt::Config::FromPod;
+  getopts(Getopt::Config::FromPod->new->string);
 
   # Typical usage for Getopt::Long or variants
   use Getopt::Long::Descriptive;
-  use Getopt::FromPod;
-  GetOptions(Getopt::FromPod->new->array);
+  use Getopt::Config::FromPod;
+  GetOptions(Getopt::Config::FromPod->new->array);
 
   # For most usage, you don't have to specify parameters but you can do so if necessary
-  Getopt::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
-  Getopt::FromPod->new->arrayref(-package => $package);
-  Getopt::FromPod->new->string(-separator => ','); # for string() only
+  Getopt::Config::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
+  Getopt::Config::FromPod->new->arrayref(-package => $package);
+  Getopt::Config::FromPod->new->string(-separator => ','); # for string() only
 
 =head1 DESCRIPTION
 
@@ -156,7 +156,7 @@ However, I believe it has some advantages to enable us to describe documentation
 Constructor. An available parameter is C<'-tag'>.
 You can change POD tag name from C<'getopt'>.
 
-  Getopt::FromPod->new(-tag => 'options')->string;
+  Getopt::Config::FromPod->new(-tag => 'options')->string;
   =for options 'h'
 
 =method string(%args)
