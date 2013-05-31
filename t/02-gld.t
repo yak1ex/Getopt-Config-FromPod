@@ -1,10 +1,11 @@
-use Test::More tests => 10;
+use Test::More;
 use Test::Exception;
 
-eval { use Getopt::Long::Descriptive; };
+eval 'use Getopt::Long::Descriptive';
 plan skip_all => "Getopt::Long::Descriptive required for this test" if $@;
 
-use Getopt::Long::Descriptive;
+plan tests => 10;
+
 use_ok 'Getopt::Config::FromPod';
 
 @ARGV = qw(--help);
