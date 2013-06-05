@@ -115,10 +115,15 @@ __END__
   use Getopt::Config::FromPod;
   getopts(Getopt::Config::FromPod->new->string);
 
-  # Typical usage for Getopt::Long or variants
+  # Typical usage for Getopt::Long
+  use Getopt::Long;
+  use Getopt::Config::FromPod;
+  GetOptions(\%opts, Getopt::Config::FromPod->new->array);
+
+  # Typical usage for Getopt::Long::Descriptive
   use Getopt::Long::Descriptive;
   use Getopt::Config::FromPod;
-  GetOptions(Getopt::Config::FromPod->new->array);
+  describe_options('my-program %o <some-arg>', Getopt::Config::FromPod->new->array);
 
   # For most usage, you don't have to specify parameters but you can do so if necessary
   Getopt::Config::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
