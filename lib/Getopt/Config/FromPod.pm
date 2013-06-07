@@ -188,3 +188,11 @@ Returns an array reference of parameters written in POD. See C<string> for avail
 =method hashref(%args)
 
 Returns a hash reference of parameters written in POD. See C<string> for available parameters.
+
+=head1 SEE ALSO
+
+=for :list
+* L<Getopt::Euclid> Another Getopt module to use POD as configuration.
+* L<Getopt::Auto> Yet another Getopt module to use POD as configuration.
+* L<Getopt::Long::DescriptivePod> Using another approach to sync with POD and configuration, updating POD from configuration.
+* L<Getopt::Compact> When showing POD usage, POD description is munged.
