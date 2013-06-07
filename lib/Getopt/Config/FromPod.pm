@@ -141,6 +141,7 @@ This module is NOT to be another option parsing module but to be a companion of 
 The C<Getopt::*> modules try to solve developers' preference of option parsing.
 So, it is likely to be impossible to provide all-in-one option parsing modules.
 One of the common problems in option parsing is consistency among:
+
 =for :list
 1. Availability in actual process
 2. Document shown by, typically, -h option
