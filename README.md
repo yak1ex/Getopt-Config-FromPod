@@ -13,10 +13,15 @@ version v0.0.0
     use Getopt::Config::FromPod;
     getopts(Getopt::Config::FromPod->new->string);
 
-    # Typical usage for Getopt::Long or variants
+    # Typical usage for Getopt::Long
+    use Getopt::Long;
+    use Getopt::Config::FromPod;
+    GetOptions(\%opts, Getopt::Config::FromPod->new->array);
+
+    # Typical usage for Getopt::Long::Descriptive
     use Getopt::Long::Descriptive;
     use Getopt::Config::FromPod;
-    GetOptions(Getopt::Config::FromPod->new->array);
+    describe_options('my-program %o <some-arg>', Getopt::Config::FromPod->new->array);
 
     # For most usage, you don't have to specify parameters but you can do so if necessary
     Getopt::Config::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
@@ -34,10 +39,18 @@ This module is NOT to be another option parsing module but to be a companion of 
 The `Getopt::*` modules try to solve developers' preference of option parsing.
 So, it is likely to be impossible to provide all-in-one option parsing modules.
 One of the common problems in option parsing is consistency among:
-=for :list
-1\. Availability in actual process
-2\. Document shown by, typically, -h option
-3\. Document shown by perldoc
+
+- 1
+
+    Availability in actual process
+
+- 2
+
+    Document shown by, typically, -h option
+
+- 3
+
+    Document shown by perldoc
 
 Some modules such as [Getopt::Long::Descriptive](http://search.cpan.org/perldoc?Getopt::Long::Descriptive) solves 1 and 2.
 Few modules such as [Getopt::Auto](http://search.cpan.org/perldoc?Getopt::Auto) solves 1, 2 and 3.
@@ -87,6 +100,14 @@ Returns an array reference of parameters written in POD. See `string` for availa
 ## hashref(%args)
 
 Returns a hash reference of parameters written in POD. See `string` for available parameters.
+
+# SEE ALSO
+
+- [Getopt::AsDocumented](http://search.cpan.org/perldoc?Getopt::AsDocumented) Another Getopt module to use POD as configuration.
+- [Getopt::Euclid](http://search.cpan.org/perldoc?Getopt::Euclid) Yet another Getopt module to use POD as configuration.
+- [Getopt::Auto](http://search.cpan.org/perldoc?Getopt::Auto) Yet yet another Getopt module to use POD as configuration.
+- [Getopt::Long::DescriptivePod](http://search.cpan.org/perldoc?Getopt::Long::DescriptivePod) Using another approach to sync with POD and configuration, updating POD from configuration.
+- [Getopt::Compact](http://search.cpan.org/perldoc?Getopt::Compact) When showing POD usage, POD description is munged.
 
 # AUTHOR
 
