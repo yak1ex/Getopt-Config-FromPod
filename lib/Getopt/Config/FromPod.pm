@@ -57,12 +57,13 @@ sub new
 {
 	my $self = shift;
 	my $class = ref $self || $self;
-	return bless {}, $class;
+	return bless { _ARG => \@_ }, $class;
 }
 
 sub _extract
 {
 	my ($self, %args) = @_;
+	%args = (@{$self->{_ARG}}, %args);
 	my $parser = Getopt::Config::FromPod::Extractor->new(%args);
 	my $file = $args{-file};
 	$args{-package} ||= 'main';
