@@ -86,8 +86,9 @@ my $SELF = __PACKAGE__->new;
 sub __ref
 {
 	my $ref = shift;
-	return if ref $ref->[0] || eval { $ref->[0]->isa(__PACKAGE__) };
-	unshift @$ref, $SELF;
+	return if ref $ref->[0];
+	croak 'Calling as neither instance method nor class method' unless eval { $ref->[0]->isa(__PACKAGE__) };
+	splice @$ref, 0, 1, $SELF;
 }
 
 sub string
