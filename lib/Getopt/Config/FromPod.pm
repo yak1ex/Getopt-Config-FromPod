@@ -170,6 +170,11 @@ To tell the truth, this module just collects option specifications distributed i
 So, dupulication between POD documentation and specification are NOT eliminated.
 However, I believe it has some advantages to enable us to describe documentation and specification at the same place.
 
+=head1 METHODS
+
+All methods except for C<new()> are callable as class methods, also.
+In this case, it works as if a shared object is specified as the first argument.
+
 =method new(%args)
 
 Constructor. An available parameter is C<'-tag'>.

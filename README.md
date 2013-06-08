@@ -64,6 +64,9 @@ However, I believe it has some advantages to enable us to describe documentation
 
 # METHODS
 
+All methods except for new are callable as class methods, also.
+In this case, it works as if a shared object is specified as the first argument.
+
 ## new(%args)
 
 Constructor. An available parameter is `'-tag'`.
