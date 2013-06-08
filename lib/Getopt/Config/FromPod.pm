@@ -81,26 +81,39 @@ sub _extract
 	return $parser->{_RESULT};
 }
 
+my $SELF = __PACKAGE__->new;
+
+sub __ref
+{
+	my $ref = shift;
+	return if ref $ref->[0] || eval { $ref->[0]->isa(__PACKAGE__) };
+	unshift @$ref, $SELF;
+}
+
 sub string
 {
+	__ref(\@_);
 	my ($self, %args) = @_;
 	return join(exists $args{-separator} ? $args{-separator} : '', $self->array(%args));
 }
 
 sub array
 {
+	__ref(\@_);
 	my ($self, %args) = @_;
 	return @{$self->_extract(%args)};
 }
 
 sub arrayref
 {
+	__ref(\@_);
 	my ($self, %args) = @_;
 	return [$self->array(%args)];
 }
 
 sub hashref
 {
+	__ref(\@_);
 	my ($self, %args) = @_;
 	return {$self->array(%args)};
 }
