@@ -25,7 +25,7 @@ lives_ok { $p = Getopt::Config::FromPod->new; } 'create';
 \=back
 EOF
 	open my $fh, '<', \$dat;
-	is($p->string(-file => $fh), 'hv:', 'string');
+	is($p->string(-file => $fh, -separator => ','), 'h,v:', 'string with file handle and separator');
 	close $fh;
 }
 
