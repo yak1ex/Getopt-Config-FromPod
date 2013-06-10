@@ -7,25 +7,8 @@ my $p;
 lives_ok { $p = Getopt::Config::FromPod->new; } 'create';
 
 { 
-	my $dat = <<EOF;
-\=pod
-
-\=head1
-
-\=over 4
-
-\=item C<-h>
-
-\=for getopt 'h'
-
-\=item C<-v> E<lt>levelE<gt>
-
-\=for getopt 'v:'
-
-\=back
-EOF
-	open my $fh, '<', \$dat;
-	is($p->string(-file => $fh, -separator => ','), 'h,v:', 'string with file handle and separator');
+	open my $fh, '<', 't/tests.pod';
+	is($p->string(-file => $fh, -separator => ','), 'h,v:,c', 'string with file handle and separator');
 	close $fh;
 }
 
@@ -34,7 +17,7 @@ my $expected = [
 	[ 'server|s=s', "the server to connect to" ],
 	[ 'port|p=i',   "the port to connect to", { default => 79 } ],
 ];
-is_deeply($p->arrayref(-file => 't/test.pod'), $expected, 'arrayref with external file');
+is_deeply($p->arrayref(-file => 't/test.pod'), $expected, 'arrayref with file name');
 
 $expected = {
 	'-h' => 'help',
