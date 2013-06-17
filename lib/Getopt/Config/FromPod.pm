@@ -128,22 +128,34 @@ __END__
   # Typical usage for Getopt::Std
   use Getopt::Std;
   use Getopt::Config::FromPod;
-  getopts(Getopt::Config::FromPod->new->string);
+  getopts(Getopt::Config::FromPod->string);
+  
+  =for getopt 'h'
+  
+  =for getopt 'v'
 
   # Typical usage for Getopt::Long
   use Getopt::Long;
   use Getopt::Config::FromPod;
-  GetOptions(\%opts, Getopt::Config::FromPod->new->array);
+  GetOptions(\%opts, Getopt::Config::FromPod->array);
+  
+  =for getopt 'port|p=i'
+  
+  =for getopt 'server|s=s'
 
   # Typical usage for Getopt::Long::Descriptive
   use Getopt::Long::Descriptive;
   use Getopt::Config::FromPod;
-  describe_options('my-program %o <some-arg>', Getopt::Config::FromPod->new->array);
+  describe_options('my-program %o <some-arg>', Getopt::Config::FromPod->array);
+  
+  =for getopt [ 'server|s=s', "the server to connect to"                  ]
+  
+  =for getopt [ 'port|p=i',   "the port to connect to", { default => 79 } ]
 
-  # For most usage, you don't have to specify parameters but you can do so if necessary
+  # For most usage, you don't have to construct object or specify parameters but you can do so if necessary
   Getopt::Config::FromPod->new(-tag => 'getopts')->arrayref(-file => $filename);
-  Getopt::Config::FromPod->new->arrayref(-package => $package);
-  Getopt::Config::FromPod->new->string(-separator => ','); # for string() only
+  Getopt::Config::FromPod->arrayref(-package => $package);
+  Getopt::Config::FromPod->string(-separator => ','); # for string() only
 
 =head1 DESCRIPTION
 
@@ -172,6 +184,25 @@ To tell the truth, this module just collects option specifications distributed i
 So, dupulication between POD documentation and specification are NOT eliminated.
 However, I believe it has some advantages to enable us to describe documentation and specification at the same place.
 
+Configuration is described as POD section C<getopt> like the follwings:
+
+  =for getopt 'v:'
+
+  =for getopt 'port|p=i'
+
+  =for getopt [ 'port|p=i',   "the port to connect to", { default => 79 } ]
+
+You can also use =begin/=end pair but it is rarely necessary and useful.
+
+  =begin getopt
+  [ 'port|p=i',
+    "the port to connect to",
+    { default => 79 }
+  ]
+  =end getopt
+
+They are eval'ed so you can describe array references, hash references and so on as above.
+
 =head1 METHODS
 
 All methods except for C<new()> are callable as class methods, also.
@@ -182,7 +213,7 @@ In this case, it works as if a shared object is specified as the first argument.
 Constructor. An available parameter is C<'-tag'>.
 You can change POD tag name from C<'getopt'>.
 
-  Getopt::Config::FromPod->new(-tag => 'options')->string;
+  Getopt::Config::FromPod->new(-tag => 'options')->string; # returns 'h'
   =for options 'h'
 
 =method string(%args)
@@ -216,5 +247,5 @@ Returns a hash reference of parameters written in POD. See C<string> for availab
 * L<Getopt::AsDocumented> Another Getopt module to use POD as configuration.
 * L<Getopt::Euclid> Yet another Getopt module to use POD as configuration.
 * L<Getopt::Auto> Yet yet another Getopt module to use POD as configuration.
-* L<Getopt::Long::DescriptivePod> Using another approach to sync with POD and configuration, updating POD from configuration.
+* L<Getopt::Long::DescriptivePod> Use another approach to sync with POD and configuration, updating POD from configuration.
 * L<Getopt::Compact> When showing POD usage, POD description is munged.
