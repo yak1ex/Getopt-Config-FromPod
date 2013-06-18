@@ -4,7 +4,7 @@ Getopt::Config::FromPod - Extract getopt configuration from POD
 
 # VERSION
 
-version v0.0.0
+version v0.0.1
 
 # SYNOPSIS
 
@@ -58,17 +58,9 @@ The `Getopt::*` modules try to solve developers' preference of option parsing.
 So, it is likely to be impossible to provide all-in-one option parsing modules.
 One of the common problems in option parsing is consistency among:
 
-- 1
-
-    Availability in actual process
-
-- 2
-
-    Document shown by, typically, -h option
-
-- 3
-
-    Document shown by perldoc
+1. Availability in actual process
+2. Document shown by, typically, -h option
+3. Document shown by perldoc
 
 Some modules such as [Getopt::Long::Descriptive](http://search.cpan.org/perldoc?Getopt::Long::Descriptive) solves 1 and 2.
 Few modules such as [Getopt::Auto](http://search.cpan.org/perldoc?Getopt::Auto) solves 1, 2 and 3.
@@ -101,7 +93,7 @@ They are eval'ed so you can describe array references, hash references and so on
 
 # METHODS
 
-All methods except for new are callable as class methods, also.
+All methods except for `new()` are callable as class methods, also.
 In this case, it works as if a shared object is specified as the first argument.
 
 ## new(%args)
@@ -140,6 +132,28 @@ Returns an array reference of parameters written in POD. See `string` for availa
 ## hashref(%args)
 
 Returns a hash reference of parameters written in POD. See `string` for available parameters.
+
+## set\_class\_default(%args)
+
+Change behavior called as class method. All class methods afther this method work as if `%args` is prepended prior to the original arguments.
+This is useful for tests of the case that POD is written in .pl file and code is implemented in .pm file.
+
+    # foo.pm
+    use Getopt::Std;
+    use Getopt::Config::FromPod;
+    getopts(Getopt::Config::FromPod->string);
+    
+
+    # foo.pl
+    =for getopt 'h'
+    
+
+    =for getopt 'v'
+    
+
+    # foo.t
+    use Getopt::Config::FromPod;
+    Getopt::Config::FromPod->set_class_default(-file => 'foo.pl');
 
 # SEE ALSO
 
