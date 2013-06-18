@@ -120,6 +120,12 @@ sub hashref
 	return {$self->array(%args)};
 }
 
+sub set_class_default
+{
+	my ($self, %args) = @_;
+	$SELF = __PACKAGE__->new(%args);
+}
+
 1;
 __END__
 
@@ -240,6 +246,25 @@ Returns an array reference of parameters written in POD. See C<string> for avail
 =method hashref(%args)
 
 Returns a hash reference of parameters written in POD. See C<string> for available parameters.
+
+=method set_class_default(%args)
+
+Change behavior called as class method. All class methods afther this method work as if C<%args> is prepended prior to the original arguments.
+This is useful for tests of the case that POD is written in .pl file and code is implemented in .pm file.
+
+  # foo.pm
+  use Getopt::Std;
+  use Getopt::Config::FromPod;
+  getopts(Getopt::Config::FromPod->string);
+  
+  # foo.pl
+  =for getopt 'h'
+  
+  =for getopt 'v'
+  
+  # foo.t
+  use Getopt::Config::FromPod;
+  Getopt::Config::FromPod->set_class_default(-file => 'foo.pl');
 
 =head1 SEE ALSO
 
