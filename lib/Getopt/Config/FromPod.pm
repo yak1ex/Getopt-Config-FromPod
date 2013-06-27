@@ -76,8 +76,18 @@ sub _extract
 				last;
 			}
 		}
+		confess "Target module not found" if ! defined $file;
+		# At least, in PAR environment, this adjustment is necessary.
+		if(! -f $file) {
+			for my $inc (@INC) {
+				if(-f "$inc/$file") {
+					$file = "$inc/$file";
+					last;
+				}
+			}
+		}
 	}
-	croak if ! defined $file;
+	croak "Target file not found: $file" if ref $file eq '' && ! -f $file;
 	$parser->parse_file($file);
 	return $parser->{_RESULT};
 }
