@@ -2,5 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+v0.0.2    2013-06-29 12:00:41 Asia/Tokyo
+    - Add workaround for PAR::Packer (gh-3).
+
 v0.0.1    2013-06-18 23:37:02 Asia/Tokyo
     - Initial release.

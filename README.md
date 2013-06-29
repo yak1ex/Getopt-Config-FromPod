@@ -4,7 +4,7 @@ Getopt::Config::FromPod - Extract getopt configuration from POD
 
 # VERSION
 
-version v0.0.1
+version v0.0.2
 
 # SYNOPSIS
 
