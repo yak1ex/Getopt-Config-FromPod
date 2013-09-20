@@ -58,9 +58,17 @@ The `Getopt::*` modules try to solve developers' preference of option parsing.
 So, it is likely to be impossible to provide all-in-one option parsing modules.
 One of the common problems in option parsing is consistency among:
 
-1. Availability in actual process
-2. Document shown by, typically, -h option
-3. Document shown by perldoc
+- 1
+
+    Availability in actual process
+
+- 2
+
+    Document shown by, typically, -h option
+
+- 3
+
+    Document shown by perldoc
 
 Some modules such as [Getopt::Long::Descriptive](http://search.cpan.org/perldoc?Getopt::Long::Descriptive) solves 1 and 2.
 Few modules such as [Getopt::Auto](http://search.cpan.org/perldoc?Getopt::Auto) solves 1, 2 and 3.
