@@ -12,14 +12,13 @@ use_ok 'Getopt::Config::FromPod';
 my @arg = ('my-program %o <some-arg>', Getopt::Config::FromPod->new->array);
 my ($opt, $usage) = describe_options(@arg);
 
-is($usage->text, <<EOF, 'usage text');
-my-program [-psv] [long options...] <some-arg>
-\t-s --server     the server to connect to
-\t-p --port       the port to connect to
-\t              
-\t-v --verbose    print extra stuff
-\t--help          print usage message and exit
-EOF
+my $help = qr/my-program \[-psv\] \[long options\.\.\.\] <some-arg>
+\t-s( STR)? --server( STR)?\s* the server to connect to
+\t-p( INT)? --port( INT)?\s* the port to connect to
+\t\s*
+\t-v --verbose\s* print extra stuff
+\t--help\s* print usage message and exit/;
+like($usage->text, $help, 'usage text');
 is($opt->{help}, 1, 'help with --help');
 is($opt->{port}, 79, 'port with --help');
 is(scalar keys %$opt, 2, 'options with --help'); # 1 for port with default
