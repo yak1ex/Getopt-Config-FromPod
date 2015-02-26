@@ -4,7 +4,7 @@ Getopt::Config::FromPod - Extract getopt configuration from POD
 
 # VERSION
 
-version v0.0.2
+version v0.0.3
 
 # SYNOPSIS
 
@@ -44,7 +44,7 @@ version v0.0.2
 
 There are many and many `Getopt::*` modules on CPAN. Is this module yet another option parsing module?
 
-__NO.__
+**NO.**
 
 This module is NOT to be another option parsing module but to be a companion of the modules.
 
